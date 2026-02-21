@@ -1,50 +1,639 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Mizbah Gazi Products</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mizbah Gazi - Premium Products Store</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        /* Header & Navigation */
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+            font-size: 24px;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #ff6b6b;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Category Section */
+        .category-section {
+            padding: 50px 20px;
+        }
+
+        .category-title {
+            font-size: 32px;
+            margin-bottom: 30px;
+            color: #333;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 15px;
+            display: inline-block;
+        }
+
+        /* Products Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            background: #f0f0f0;
+        }
+
+        .product-info {
+            padding: 15px;
+        }
+
+        .product-name {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .product-description {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .product-price {
+            font-size: 20px;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 12px;
+        }
+
+        .product-rating {
+            color: #ffc107;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        .add-to-cart-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .add-to-cart-btn:hover {
+            opacity: 0.9;
+            transform: scale(1.02);
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .footer-links a:hover {
+            color: #667eea;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: #000;
+        }
+
+        @media (max-width: 768px) {
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .nav-links {
+                gap: 15px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Mizbah Gazi</h1>
-    <h2>Kids</h2>
-    <div class="product-category">
-        <div class="product">
-            <h3>Toy 1</h3>
-            <p>Description for Toy 1</p>
-            <p>Price: $10</p>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">🏪 Mizbah Gazi</div>
+            <ul class="nav-links">
+                <li><a onclick="scrollToSection('kids')">Kids</a></li>
+                <li><a onclick="scrollToSection('jewellery')">Jewellery</a></li>
+                <li><a onclick="scrollToSection('shoes')">Shoes</a></li>
+                <li><a onclick="scrollToSection('contact')">Contact</a></li>
+            </ul>
+            <div class="cart-icon" onclick="openCart()">
+                🛒
+                <span class="cart-count" id="cartCount">0</span>
+            </div>
         </div>
-        <div class="product">
-            <h3>Toy 2</h3>
-            <p>Description for Toy 2</p>
-            <p>Price: $15</p>
-        </div>
-        <!-- Add more kids products here -->
+    </header>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <h1>Welcome to Mizbah Gazi</h1>
+        <p>Premium Products for Kids, Jewellery & Shoes</p>
     </div>
-    <h2>Jewellery</h2>
-    <div class="product-category">
-        <div class="product">
-            <h3>Necklace 1</h3>
-            <p>Description for Necklace 1</p>
-            <p>Price: $25</p>
+
+    <!-- Kids Products Section -->
+    <div class="container category-section" id="kids">
+        <h2 class="category-title">👕 Kids Products</h2>
+        <div class="products-grid">
+            <div class="product-card">
+                <img src="https://via.placeholder.com/250x250/FF6B9D/FFFFFF?text=Kids+Shirt+1" alt="Kids Shirt" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Colorful Kids T-Shirt</div>
+                    <div class="product-description">Comfortable cotton t-shirt for kids, available in multiple colors</div>
+                    <div class="product-rating">⭐⭐⭐⭐⭐ (245 reviews)</div>
+                    <div class="product-price">$12.99</div>
+                    <button class="add-to-cart-btn" onclick="addToCart('Colorful Kids T-Shirt', 12.99)">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="https://via.placeholder.com/250x250/FF6B9D/FFFFFF?text=Kids+Shorts" alt="Kids Shorts" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Kids Summer Shorts</div>
+                    <div class="product-description">Light and breathable shorts perfect for summer play</div>
+                    <div class="product-rating">⭐⭐⭐⭐ (189 reviews)</div>
+                    <div class="product-price">$14.99</div>
+                    <button class="add-to-cart-btn" onclick="addToCart('Kids Summer Shorts', 14.99)">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="https://via.placeholder.com/250x250/FF6B9D/FFFFFF?text=Kids+Jacket" alt="Kids Jacket" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Kids Winter Jacket</div>
+                    <div class="product-description">Warm and cozy jacket for winter season</div>
+                    <div class="product-rating">⭐⭐⭐⭐⭐ (312 reviews)</div>
+                    <div class="product-price">$34.99</div>
+                    <button class="add-to-cart-btn" onclick="addToCart('Kids Winter Jacket', 34.99)">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="https://via.placeholder.com/250x250/FF6B9D/FFFFFF?text=Kids+Dress" alt="Kids Dress" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Elegant Kids Party Dress</div>
+                    <div class="product-description">Beautiful dress for special occasions and parties</div>
+                    <div class="product-rating">⭐⭐⭐⭐⭐ (278 reviews)</div>
+                    <div class="product-price">$26.99</div>
+                    <button class="add-to-cart-btn" onclick="addToCart('Elegant Kids Party Dress', 26.99)">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="https://via.placeholder.com/250x250/FF6B9D/FFFFFF?text=Kids+Pajamas" alt="Kids Pajamas" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Cozy Kids Pajamas</div>
+                    <div class="product-description">Soft pajama sets for comfortable sleep</div>
+                    <div class="product-rating">⭐⭐⭐⭐ (156 reviews)</div>
+                    <div class="product-price">$16.99</div>
+                    <button class="add-to-cart-btn" onclick="addToCart('Cozy Kids Pajamas', 16.99)">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="https://via.placeholder.com/250x250/FF6B9D/FFFFFF?text=Kids+Sweater" alt="Kids Sweater" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Kids Wool Sweater</div>
+                    <div class="product-description">Warm wool sweater for chilly days</div>
+                    <div class="product-rating">⭐⭐⭐⭐⭐ (234 reviews)</div>
+                    <div class="product-price">$22.99</div>
+                    <button class="add-to-cart-btn" onclick="addToCart('Kids Wool Sweater', 22.99)">Add to Cart</button>
+                </div>
+            </div>
         </div>
-        <div class="product">
-            <h3>Ring 1</h3>
-            <p>Description for Ring 1</p>
-            <p>Price: $30</p>
-        </div>
-        <!-- Add more jewellery products here -->
     </div>
-    <h2>Shoes</h2>
-    <div class="product-category">
-        <div class="product">
-            <h3>Shoe 1</h3>
-            <p>Description for Shoe 1</p>
-            <p>Price: $40</p>
+
+    <!-- Jewellery Section -->
+    <div class="container category-section" id="jewellery">
+        <h2 class="category-title">💎 Jewellery</h2>
+        <div class="products-grid">
+            <div class="product-card">
+                <img src="https://via.placeholder.com/250x250/FFD700/FFFFFF?text=Gold+Necklace" alt="Gold Necklace" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Gold Pendant Necklace</div>
+                    <div class="product-description">Elegant 18K gold pendant necklace with chain</div>
+                    <div class="product-rating">⭐⭐⭐⭐⭐ (456 reviews)</div>
+                    <div class="product-price">$89.99</div>
+                    <button class="add-to-cart-btn" onclick="addToCart('Gold Pendant Necklace', 89.99)">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="https://via.placeholder.com/250x250/FFD700/FFFFFF?text=Diamond+Ring" alt="Diamond Ring" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Diamond Engagement Ring</div>
+                    <div class="product-description">Stunning diamond ring for engagements</div>
+                    <div class="product-rating">⭐⭐⭐⭐⭐ (523 reviews)</div>
+                    <div class="product-price">$299.99</div>
+                    <button class="add-to-cart-btn" onclick="addToCart('Diamond Engagement Ring', 299.99)">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="https://via.placeholder.com/250x250/FFD700/FFFFFF?text=Silver+Bracelet" alt="Silver Bracelet" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Silver Charm Bracelet</div>
+                    <div class="product-description">Beautiful 925 silver bracelet with charms</div>
+                    <div class="product-rating">⭐⭐⭐⭐ (378 reviews)</div>
+                    <div class="product-price">$54.99</div>
+                    <button class="add-to-cart-btn" onclick="addToCart('Silver Charm Bracelet', 54.99)">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="https://via.placeholder.com/250x250/FFD700/FFFFFF?text=Pearl+Earrings" alt="Pearl Earrings" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Pearl Drop Earrings</div>
+                    <div class="product-description">Elegant pearl earrings for formal occasions</div>
+                    <div class="product-rating">⭐⭐⭐⭐⭐ (289 reviews)</div>
+                    <div class="product-price">$45.99</div>
+                    <button class="add-to-cart-btn" onclick="addToCart('Pearl Drop Earrings', 45.99)">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="https://via.placeholder.com/250x250/FFD700/FFFFFF?text=Ruby+Ring" alt="Ruby Ring" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Ruby Statement Ring</div>
+                    <div class="product-description">Bold ruby ring with intricate design</div>
+                    <div class="product-rating">⭐⭐⭐⭐⭐ (401 reviews)</div>
+                    <div class="product-price">$149.99</div>
+                    <button class="add-to-cart-btn" onclick="addToCart('Ruby Statement Ring', 149.99)">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="https://via.placeholder.com/250x250/FFD700/FFFFFF?text=Gold+Anklet" alt="Gold Anklet" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Gold Chain Anklet</div>
+                    <div class="product-description">Delicate gold anklet for everyday wear</div>
+                    <div class="product-rating">⭐⭐⭐⭐ (267 reviews)</div>
+                    <div class="product-price">$39.99</div>
+                    <button class="add-to-cart-btn" onclick="addToCart('Gold Chain Anklet', 39.99)">Add to Cart</button>
+                </div>
+            </div>
         </div>
-        <div class="product">
-            <h3>Shoe 2</h3>
-            <p>Description for Shoe 2</p>
-            <p>Price: $45</p>
-        </div>
-        <!-- Add more shoe products here -->
     </div>
+
+    <!-- Shoes Section -->
+    <div class="container category-section" id="shoes">
+        <h2 class="category-title">👟 Shoes</h2>
+        <div class="products-grid">
+            <div class="product-card">
+                <img src="https://via.placeholder.com/250x250/FF6B35/FFFFFF?text=Running+Shoes" alt="Running Shoes" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Professional Running Shoes</div>
+                    <div class="product-description">Lightweight shoes with superior comfort for running</div>
+                    <div class="product-rating">⭐⭐⭐⭐⭐ (612 reviews)</div>
+                    <div class="product-price">$79.99</div>
+                    <button class="add-to-cart-btn" onclick="addToCart('Professional Running Shoes', 79.99)">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="https://via.placeholder.com/250x250/FF6B35/FFFFFF?text=Casual+Sneakers" alt="Casual Sneakers" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Classic Casual Sneakers</div>
+                    <div class="product-description">Versatile sneakers perfect for everyday wear</div>
+                    <div class="product-rating">⭐⭐⭐⭐ (543 reviews)</div>
+                    <div class="product-price">$49.99</div>
+                    <button class="add-to-cart-btn" onclick="addToCart('Classic Casual Sneakers', 49.99)">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="https://via.placeholder.com/250x250/FF6B35/FFFFFF?text=Formal+Shoes" alt="Formal Shoes" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Elegant Formal Shoes</div>
+                    <div class="product-description">Premium leather shoes for formal occasions</div>
+                    <div class="product-rating">⭐⭐⭐⭐⭐ (478 reviews)</div>
+                    <div class="product-price">$99.99</div>
+                    <button class="add-to-cart-btn" onclick="addToCart('Elegant Formal Shoes', 99.99)">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="https://via.placeholder.com/250x250/FF6B35/FFFFFF?text=Sports+Shoes" alt="Sports Shoes" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">High-Performance Sports Shoes</div>
+                    <div class="product-description">Advanced athletic shoes for all sports</div>
+                    <div class="product-rating">⭐⭐⭐⭐⭐ (689 reviews)</div>
+                    <div class="product-price">$89.99</div>
+                    <button class="add-to-cart-btn" onclick="addToCart('High-Performance Sports Shoes', 89.99)">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="https://via.placeholder.com/250x250/FF6B35/FFFFFF?text=Loafers" alt="Loafers" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Comfortable Loafers</div>
+                    <div class="product-description">Stylish loafers for comfortable casual look</div>
+                    <div class="product-rating">⭐⭐⭐⭐ (421 reviews)</div>
+                    <div class="product-price">$64.99</div>
+                    <button class="add-to-cart-btn" onclick="addToCart('Comfortable Loafers', 64.99)">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="https://via.placeholder.com/250x250/FF6B35/FFFFFF?text=Sandals" alt="Sandals" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Summer Flip Sandals</div>
+                    <div class="product-description">Breathable sandals for hot summer days</div>
+                    <div class="product-rating">⭐⭐⭐⭐ (356 reviews)</div>
+                    <div class="product-price">$24.99</div>
+                    <button class="add-to-cart-btn" onclick="addToCart('Summer Flip Sandals', 24.99)">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <div class="container category-section" id="contact">
+        <h2 class="category-title">📞 Contact Us</h2>
+        <div style="background: white; padding: 30px; border-radius: 10px; max-width: 600px;">
+            <p><strong>Email:</strong> info@mizbaggazi.com</p>
+            <p><strong>Phone:</strong> +1-800-MIZBAH-1</p>
+            <p><strong>Address:</strong> 123 Fashion Street, Gazi City, GZ 12345</p>
+            <p><strong>Hours:</strong> Mon-Fri: 9AM-6PM | Sat-Sun: 10AM-4PM</p>
+        </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div id="cartModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeCart()">&times;</span>
+            <h2>Shopping Cart</h2>
+            <div id="cartItems" style="margin: 20px 0; max-height: 300px; overflow-y: auto;"></div>
+            <div style="margin-top: 20px; padding-top: 15px; border-top: 1px solid #ddd;">
+                <h3>Total: <span id="cartTotal">$0.00</span></h3>
+                <button onclick="checkout()" style="width: 100%; padding: 12px; background: #667eea; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; margin-top: 10px;">Proceed to Checkout</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#kids">Kids</a>
+                <a href="#jewellery">Jewellery</a>
+                <a href="#shoes">Shoes</a>
+                <a href="#">About Us</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms & Conditions</a>
+            </div>
+            <p>&copy; 2026 Mizbah Gazi. All rights reserved. | Follow us on Social Media</p>
+            <p>📱 Instagram | 📘 Facebook | 🐦 Twitter</p>
+        </div>
+    </footer>
+
+    <script>
+        let cart = [];
+
+        function addToCart(productName, price) {
+            cart.push({ name: productName, price: price });
+            updateCartCount();
+            alert(`${productName} added to cart!`);
+        }
+
+        function updateCartCount() {
+            document.getElementById('cartCount').textContent = cart.length;
+        }
+
+        function openCart() {
+            document.getElementById('cartModal').style.display = 'block';
+            displayCart();
+        }
+
+        function closeCart() {
+            document.getElementById('cartModal').style.display = 'none';
+        }
+
+        function displayCart() {
+            const cartItemsDiv = document.getElementById('cartItems');
+            const cartTotalSpan = document.getElementById('cartTotal');
+            
+            if (cart.length === 0) {
+                cartItemsDiv.innerHTML = '<p>Your cart is empty</p>';
+                cartTotalSpan.textContent = '$0.00';
+                return;
+            }
+
+            let html = '<ul style="list-style: none;">';
+            let total = 0;
+
+            cart.forEach((item, index) => {
+                html += `<li style="padding: 10px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between;">
+                    <span>${item.name}</span>
+                    <span>$${item.price.toFixed(2)}</span>
+                    <button onclick="removeFromCart(${index})" style="background: #ff6b6b; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer;">Remove</button>
+                </li>`;
+                total += item.price;
+            });
+
+            html += '</ul>';
+            cartItemsDiv.innerHTML = html;
+            cartTotalSpan.textContent = '$' + total.toFixed(2);
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartCount();
+            displayCart();
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                alert('Your cart is empty!');
+                return;
+            }
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            alert(`Order placed! Total amount: $${total.toFixed(2)}\n\nThank you for shopping with Mizbah Gazi!`);
+            cart = [];
+            updateCartCount();
+            closeCart();
+        }
+
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('cartModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
 </body>
 </html>
