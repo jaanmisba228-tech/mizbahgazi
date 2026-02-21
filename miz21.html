@@ -3,174 +3,184 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Misba Gazi | 100+ Designer Varieties</title>
+    <title>Misba Gazi | Fashion Hub</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { --pink: #ff2d75; --dark: #1a1a1a; --gold: #d4af37; --bg: #f9f9f9; }
-        * { margin:0; padding:0; box-sizing:border-box; font-family: 'Poppins', sans-serif; }
-        body { background: var(--bg); color: var(--dark); }
+        :root { --brand: #f43397; --bg: #f8f8ff; --text: #333; }
+        * { margin:0; padding:0; box-sizing:border-box; font-family: 'Roboto', sans-serif; }
+        body { background: var(--bg); padding-bottom: 70px; }
 
-        header { background: white; padding: 12px 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
-        .logo { font-size: 22px; font-weight: 800; color: var(--pink); text-transform: uppercase; }
+        /* Custom Misba Gazi Header */
+        header { background: white; padding: 10px 15px; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #eee; }
+        .top-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        .logo { color: var(--brand); font-size: 24px; font-weight: 900; letter-spacing: -1px; text-transform: lowercase; }
         
-        .category-nav { background: white; padding: 10px; display: flex; gap: 10px; overflow-x: auto; border-bottom: 1px solid #eee; position: sticky; top: 55px; z-index: 999; scrollbar-width: none; }
-        .cat-item { padding: 8px 20px; background: #eee; border-radius: 20px; font-size: 13px; cursor: pointer; white-space: nowrap; font-weight: 600; }
-        .cat-item.active { background: var(--pink); color: white; }
+        .search-box { background: #fdfdfd; border: 1px solid #d1d1d1; border-radius: 8px; display: flex; align-items: center; padding: 10px 15px; }
+        .search-box input { border: none; outline: none; width: 100%; font-size: 14px; margin-left: 10px; background: transparent; }
 
-        .container { max-width: 1300px; margin: 20px auto; padding: 0 15px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; }
-        
-        .product-card { background: white; border-radius: 10px; overflow: hidden; border: 1px solid #eee; display: flex; flex-direction: column; transition: 0.3s; }
-        .product-card.hidden { display: none; }
-        
-        .img-box { position: relative; width: 100%; height: 220px; background: #f0f0f0; }
-        .img-box img { width: 100%; height: 100%; object-fit: cover; }
-        .badge { position: absolute; top: 8px; left: 8px; background: var(--pink); color: white; font-size: 10px; padding: 3px 7px; border-radius: 3px; font-weight: bold; }
-        .anti-badge { background: #00b894; }
+        /* Professional Banner */
+        .banner { width: 95%; margin: 15px auto; border-radius: 12px; overflow: hidden; height: 160px; background: linear-gradient(45deg, #f43397, #ff7eb3); position: relative; box-shadow: 0 4px 15px rgba(244, 51, 151, 0.2); }
+        .banner img { width: 100%; height: 100%; object-fit: cover; opacity: 0.5; }
+        .banner-text { position: absolute; top: 25%; left: 20px; color: white; text-shadow: 1px 1px 5px rgba(0,0,0,0.2); }
 
-        .p-details { padding: 12px; flex-grow: 1; }
-        .p-name { font-size: 13px; font-weight: 600; color: #444; height: 35px; overflow: hidden; margin-bottom: 5px; }
-        .p-price { font-size: 16px; font-weight: 700; color: var(--pink); }
-        
-        .btn-group { display: flex; gap: 5px; padding: 0 12px 12px; }
-        .add-cart { background: #f0f0f0; color: #333; border: none; padding: 8px; border-radius: 5px; font-size: 11px; cursor: pointer; flex: 1; font-weight: 600; }
-        .buy-now { background: var(--dark); color: white; border: none; padding: 8px; border-radius: 5px; font-size: 11px; cursor: pointer; flex: 1; font-weight: 600; }
+        /* Category Icons */
+        .cat-row { display: flex; overflow-x: auto; padding: 15px; gap: 20px; background: white; scrollbar-width: none; }
+        .cat-row::-webkit-scrollbar { display: none; }
+        .cat-item { text-align: center; min-width: 70px; cursor: pointer; }
+        .cat-item img { width: 55px; height: 55px; border-radius: 50%; object-fit: cover; border: 2px solid #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .cat-item p { font-size: 11px; margin-top: 7px; font-weight: 600; color: #444; }
 
-        #cartSide { position: fixed; right: -100%; top: 0; width: 350px; height: 100%; background: white; z-index: 2000; transition: 0.4s; padding: 20px; box-shadow: -5px 0 15px rgba(0,0,0,0.1); overflow-y: auto; }
+        /* Product Card Design */
+        .container { padding: 10px; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .card { background: white; border-radius: 10px; overflow: hidden; border: 1px solid #f0f0f0; transition: 0.3s; }
+        .img-wrap { height: 220px; width: 100%; position: relative; background: #fafafa; }
+        .img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+        .trust-badge { position: absolute; bottom: 0; left: 0; background: #333; color: white; font-size: 9px; padding: 3px 8px; font-weight: bold; }
+
+        .info { padding: 12px; }
+        .p-name { font-size: 13px; color: #555; height: 32px; overflow: hidden; line-height: 1.2; font-weight: 500; }
+        .price-row { display: flex; align-items: center; gap: 6px; margin: 8px 0 4px; }
+        .price { font-size: 18px; font-weight: 800; color: #222; }
+        .off-tag { color: #03a685; font-size: 11px; font-weight: 700; }
+        .delivery { font-size: 10px; background: #f0f0f0; padding: 2px 8px; border-radius: 12px; display: inline-block; color: #666; }
+        
+        /* Interactive Buttons */
+        .actions { display: flex; gap: 6px; padding: 0 12px 12px; }
+        .btn-cart { flex: 1; border: 1.5px solid var(--brand); color: var(--brand); background: white; padding: 10px; font-size: 11px; font-weight: 700; border-radius: 6px; cursor: pointer; }
+        .btn-buy { flex: 1; background: var(--brand); color: white; border: none; padding: 10px; font-size: 11px; font-weight: 700; border-radius: 6px; cursor: pointer; }
+
+        /* Bottom Fixed Navigation */
+        .nav-bottom { position: fixed; bottom: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 10px; border-top: 1px solid #eee; box-shadow: 0 -2px 10px rgba(0,0,0,0.05); }
+        .nav-item { text-align: center; color: #777; font-size: 10px; text-decoration: none; transition: 0.2s; }
+        .nav-item i { font-size: 22px; display: block; margin-bottom: 4px; }
+        .nav-item.active { color: var(--brand); }
+
+        /* Checkout Sidebar */
+        #cartSide { position: fixed; right: -100%; top: 0; width: 100%; height: 100%; background: white; z-index: 2000; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); padding: 20px; overflow-y: auto; }
         #cartSide.active { right: 0; }
-        .form-area { background: #fff1f5; padding: 15px; border-radius: 10px; margin-top: 20px; }
-        .form-area input { width: 100%; padding: 10px; margin-bottom: 8px; border: 1px solid #ddd; border-radius: 5px; }
-        .wa-submit { background: #25D366; color: white; border: none; width: 100%; padding: 15px; border-radius: 5px; font-weight: 800; cursor: pointer; }
-
-        @media (max-width: 500px) { .grid { grid-template-columns: 1fr 1fr; } #cartSide { width: 100%; } }
     </style>
 </head>
 <body>
 
 <header>
-    <div class="logo">Misba Gazi</div>
-    <div onclick="toggleCart()" style="cursor:pointer; position:relative;">
-        <i class="fas fa-shopping-bag" style="font-size:22px;"></i>
-        <span id="cartCount" style="position:absolute; top:-5px; right:-8px; background:var(--pink); color:white; font-size:10px; padding:2px 6px; border-radius:50%;">0</span>
+    <div class="top-row">
+        <div class="logo">misba gazi</div>
+        <div style="display:flex; gap:20px; font-size:22px; color: #444;">
+            <i class="far fa-bell"></i>
+            <i class="far fa-heart"></i>
+            <i class="fas fa-shopping-cart" onclick="toggleCart()"></i>
+        </div>
+    </div>
+    <div class="search-box">
+        <i class="fas fa-search" style="color:#aaa;"></i>
+        <input type="text" placeholder="Search Jhumkas, Rings or Shoes...">
     </div>
 </header>
 
-<div class="category-nav">
-    <div class="cat-item active" onclick="filter('all', this)">All Stock</div>
-    <div class="cat-item" onclick="filter('jewellery', this)">Jewellery</div>
-    <div class="cat-item" onclick="filter('anti', this)">Anti-Tarnish</div>
-    <div class="cat-item" onclick="filter('earring', this)">Earrings</div>
-    <div class="cat-item" onclick="filter('ring', this)">Rings</div>
-    <div class="cat-item" onclick="filter('outfit', this)">Outfits</div>
+<div class="banner">
+    <img src="https://images.unsplash.com/photo-1513094735237-8f2714d57c13?w=500">
+    <div class="banner-text">
+        <h2 style="font-size: 20px;">MISBA GAZI EXCLUSIVE</h2>
+        <p style="font-size: 13px;">New Kids & Women Collection is Live!</p>
+    </div>
+</div>
+
+<div class="cat-row">
+    <div class="cat-item" onclick="filter('all')"><img src="https://images.unsplash.com/photo-1617033935324-a23bb27a67ad?w=100"><p>Shop All</p></div>
+    <div class="cat-item" onclick="filter('jhumka')"><img src="https://images.unsplash.com/photo-1630019852942-f89202989a59?w=100"><p>Jhumkas</p></div>
+    <div class="cat-item" onclick="filter('ring')"><img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=100"><p>Rings</p></div>
+    <div class="cat-item" onclick="filter('women-shoes')"><img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=100"><p>Footwear</p></div>
+    <div class="cat-item" onclick="filter('kids')"><img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=100"><p>Kids Wear</p></div>
 </div>
 
 <div class="container">
+    <h3 style="margin: 10px 5px 15px; font-size: 18px;">Best Sellers For You</h3>
     <div class="grid" id="productGrid">
         
-        <div class="product-card" data-cat="anti">
-            <div class="badge anti-badge">NO FADE</div>
-            <div class="img-box"><img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=300"></div>
-            <div class="p-details"><div class="p-name">Golden Snake Chain (Anti-Tarnish)</div><div class="p-price">₹1,199</div></div>
-            <div class="btn-group">
-                <button class="add-cart" onclick="addToCart('Snake Chain', 1199)">Cart</button>
-                <button class="buy-now" onclick="buyNow('Snake Chain', 1199)">Buy Now</button>
+        <div class="card" data-type="jhumka">
+            <div class="img-wrap">
+                <img src="https://images.unsplash.com/photo-1630019852942-f89202989a59?w=400">
+                <div class="trust-badge">Misba Trusted</div>
+            </div>
+            <div class="info">
+                <p class="p-name">Traditional Heavy Meenakari Jhumkas</p>
+                <div class="price-row"><span class="price">₹399</span><span class="off-tag">Special Price</span></div>
+                <span class="delivery">Free Delivery</span>
+            </div>
+            <div class="actions">
+                <button class="btn-cart" onclick="addCart('Meenakari Jhumka', 399)">Add Cart</button>
+                <button class="btn-buy" onclick="buyNow('Meenakari Jhumka', 399)">Buy Now</button>
             </div>
         </div>
 
-        <div class="product-card" data-cat="anti">
-            <div class="badge anti-badge">WATERPROOF</div>
-            <div class="img-box"><img src="https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=300"></div>
-            <div class="p-details"><div class="p-name">Luxury Rose Gold Bracelet</div><div class="p-price">₹999</div></div>
-            <div class="btn-group">
-                <button class="add-cart" onclick="addToCart('RG Bracelet', 999)">Cart</button>
-                <button class="buy-now" onclick="buyNow('RG Bracelet', 999)">Buy Now</button>
+        <div class="card" data-type="ring">
+            <div class="img-wrap">
+                <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=400">
+                <div class="trust-badge">Premium</div>
+            </div>
+            <div class="info">
+                <p class="p-name">Butterfly Gold Finish Adjustable Ring</p>
+                <div class="price-row"><span class="price">₹249</span><span class="off-tag">80% Off</span></div>
+                <span class="delivery">Free Delivery</span>
+            </div>
+            <div class="actions">
+                <button class="btn-cart" onclick="addCart('Butterfly Ring', 249)">Add Cart</button>
+                <button class="btn-buy" onclick="buyNow('Butterfly Ring', 249)">Buy Now</button>
             </div>
         </div>
 
-        <div class="product-card" data-cat="earring">
-            <div class="img-box"><img src="https://images.unsplash.com/photo-1630019852942-f89202989a59?w=300"></div>
-            <div class="p-details"><div class="p-name">Korean Pearl Drop Earrings</div><div class="p-price">₹450</div></div>
-            <div class="btn-group">
-                <button class="add-cart" onclick="addToCart('Pearl Earrings', 450)">Cart</button>
-                <button class="buy-now" onclick="buyNow('Pearl Earrings', 450)">Buy Now</button>
+        <div class="card" data-type="kids">
+            <div class="img-wrap">
+                <img src="https://images.unsplash.com/photo-1514989940723-e8e51635b782?w=400">
+            </div>
+            <div class="info">
+                <p class="p-name">Soft-Sole Kids Party Sneakers</p>
+                <div class="price-row"><span class="price">₹599</span><span class="off-tag">New Arrival</span></div>
+                <span class="delivery">Free Delivery</span>
+            </div>
+            <div class="actions">
+                <button class="btn-cart" onclick="addCart('Kids Sneakers', 599)">Add Cart</button>
+                <button class="btn-buy" onclick="buyNow('Kids Sneakers', 599)">Buy Now</button>
             </div>
         </div>
 
-        <div class="product-card" data-cat="earring">
-            <div class="img-box"><img src="https://images.unsplash.com/photo-1535633302723-99e393e44a5e?w=300"></div>
-            <div class="p-details"><div class="p-name">Heavy Meenakari Jhumkas</div><div class="p-price">₹750</div></div>
-            <div class="btn-group">
-                <button class="add-cart" onclick="addToCart('Meenakari Jhumka', 750)">Cart</button>
-                <button class="buy-now" onclick="buyNow('Meenakari Jhumka', 750)">Buy Now</button>
-            </div>
-        </div>
+    </div>
+</div>
 
-        <div class="product-card" data-cat="ring">
-            <div class="img-box"><img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=300"></div>
-            <div class="p-details"><div class="p-name">Adjustable Butterfly Ring</div><div class="p-price">₹350</div></div>
-            <div class="btn-group">
-                <button class="add-cart" onclick="addToCart('Butterfly Ring', 350)">Cart</button>
-                <button class="buy-now" onclick="buyNow('Butterfly Ring', 350)">Buy Now</button>
-            </div>
-        </div>
-
-        <div class="product-card" data-cat="ring">
-            <div class="img-box"><img src="https://images.unsplash.com/photo-1544450295-a82e707df75a?w=300"></div>
-            <div class="p-details"><div class="p-name">Classic Solitaire Diamond Ring</div><div class="p-price">₹599</div></div>
-            <div class="btn-group">
-                <button class="add-cart" onclick="addToCart('Solitaire Ring', 599)">Cart</button>
-                <button class="buy-now" onclick="buyNow('Solitaire Ring', 599)">Buy Now</button>
-            </div>
-        </div>
-
-        <div class="product-card" data-cat="outfit">
-            <div class="img-box"><img src="https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=300"></div>
-            <div class="p-details"><div class="p-name">Heavy Velvet Party Gown</div><div class="p-price">₹3,499</div></div>
-            <div class="btn-group">
-                <button class="add-cart" onclick="addToCart('Velvet Gown', 3499)">Cart</button>
-                <button class="buy-now" onclick="buyNow('Velvet Gown', 3499)">Buy Now</button>
-            </div>
-        </div>
-
-        </div>
+<div class="nav-bottom">
+    <a href="#" class="nav-item active"><i class="fas fa-home"></i>Home</a>
+    <a href="#" class="nav-item"><i class="fas fa-th-large"></i>Categories</a>
+    <a href="#" class="nav-item"><i class="fas fa-shopping-bag"></i>Orders</a>
+    <a href="#" class="nav-item"><i class="fas fa-user"></i>Account</a>
 </div>
 
 <div id="cartSide">
-    <div style="display:flex; justify-content:space-between; align-items:center;">
-        <h3>Your Shopping Bag</h3>
-        <span onclick="toggleCart()" style="font-size:24px; cursor:pointer;">&times;</span>
+    <div style="display:flex; align-items:center; gap:15px; border-bottom:1px solid #eee; padding-bottom:15px;">
+        <i class="fas fa-arrow-left" style="font-size: 20px;" onclick="toggleCart()"></i>
+        <h2 style="font-size:18px;">Order Details</h2>
     </div>
-    <div id="cartList" style="margin:20px 0;"></div>
-    <h3>Total: ₹<span id="total">0</span></h3>
-    
-    <div class="form-area">
-        <input type="text" id="uName" placeholder="Full Name">
-        <input type="tel" id="uPhone" placeholder="WhatsApp Number">
-        <textarea id="uAddr" style="width:100%; padding:10px; border-radius:5px; border:1px solid #ddd; margin-bottom:10px;" placeholder="Full Address"></textarea>
-        <button class="wa-submit" onclick="sendToWA()">ORDER ON WHATSAPP</button>
+    <div id="cartContent" style="margin-top:20px;"></div>
+    <div style="position:fixed; bottom:20px; width:90%; background: white;">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+            <span>Total Amount:</span>
+            <b id="total" style="color: var(--brand); font-size: 20px;">₹0</b>
+        </div>
+        <input type="text" id="custName" placeholder="Full Name" style="width:100%; padding:12px; margin-bottom:10px; border:1px solid #ddd; border-radius:8px;">
+        <textarea id="custAddr" placeholder="Complete Address (Flat No, Street, Pincode)" style="width:100%; padding:12px; margin-bottom:10px; border:1px solid #ddd; border-radius:8px; height: 80px;"></textarea>
+        <button onclick="sendWA()" style="width:100%; background:var(--brand); color:white; border:none; padding:15px; border-radius:8px; font-weight:800; font-size: 16px; box-shadow: 0 4px 10px rgba(244, 51, 151, 0.3);">CONFIRM ORDER VIA WHATSAPP</button>
     </div>
 </div>
 
 <script>
     let cart = [];
 
-    function filter(category, element) {
-        document.querySelectorAll('.cat-item').forEach(i => i.classList.remove('active'));
-        element.classList.add('active');
-        const products = document.querySelectorAll('.product-card');
-        products.forEach(p => {
-            if(category === 'all' || p.getAttribute('data-cat') === category) {
-                p.classList.remove('hidden');
-            } else { p.classList.add('hidden'); }
-        });
-    }
-
     function toggleCart() { document.getElementById('cartSide').classList.toggle('active'); }
 
-    function addToCart(name, price) {
+    function addCart(name, price) {
         cart.push({name, price});
         renderCart();
-        alert(name + " added to cart!");
+        alert(name + " added to bag!");
     }
 
     function buyNow(name, price) {
@@ -180,34 +190,41 @@
     }
 
     function renderCart() {
-        const list = document.getElementById('cartList');
-        const count = document.getElementById('cartCount');
-        const total = document.getElementById('total');
-        count.innerText = cart.length;
+        const list = document.getElementById('cartContent');
+        const totalDisp = document.getElementById('total');
+        let total = 0;
         let html = '';
-        let sum = 0;
         cart.forEach((item, i) => {
-            html += `<div style="display:flex; justify-content:space-between; margin-bottom:10px; border-bottom:1px solid #eee; padding-bottom:5px;">
-                <span>${item.name}</span>
-                <span>₹${item.price} <i class="fas fa-trash" style="color:red; margin-left:8px; cursor:pointer;" onclick="removeItem(${i})"></i></span>
+            html += `<div style="display:flex; justify-content:space-between; margin-bottom:15px; background:#f9f9f9; padding:15px; border-radius:10px; border: 1px solid #eee;">
+                <div><b>${item.name}</b><br><small style="color:#888;">Qty: 1</small></div>
+                <b>₹${item.price}</b>
             </div>`;
-            sum += item.price;
+            total += item.price;
         });
-        list.innerHTML = html || "Your bag is empty!";
-        total.innerText = sum;
+        list.innerHTML = html || "<p style='text-align:center; margin-top:50px; color:#888;'>Your bag is empty!</p>";
+        totalDisp.innerText = "₹" + total;
     }
 
-    function removeItem(i) { cart.splice(i, 1); renderCart(); }
+    function sendWA() {
+        const name = document.getElementById('custName').value;
+        const addr = document.getElementById('custAddr').value;
+        if(!name || !addr || cart.length === 0) { alert("Please enter delivery details!"); return; }
+        
+        let products = "";
+        cart.forEach((i, idx) => products += `${idx+1}. ${i.name} (₹${i.price})%0A`);
+        const totalAmount = document.getElementById('total').innerText;
 
-    function sendToWA() {
-        const name = document.getElementById('uName').value;
-        const phone = document.getElementById('uPhone').value;
-        const addr = document.getElementById('uAddr').value;
-        if(!name || !phone || !addr || cart.length === 0) { alert("Please fill all details!"); return; }
-        let items = "";
-        cart.forEach((item, i) => { items += `${i+1}. ${item.name} - ₹${item.price}%0A`; });
-        const msg = `*NEW ORDER - MISBA GAZI*%0A%0A*Name:* ${name}%0A*Phone:* ${phone}%0A*Address:* ${addr}%0A%0A*Items:*%0A${items}%0A*Total:* ₹${document.getElementById('total').innerText}%0A*COD ORDER*`;
+        const msg = `*NEW ORDER - MISBA GAZI STORE*%0A%0A*Customer:* ${name}%0A*Address:* ${addr}%0A%0A*Products Ordered:*%0A${products}%0A*Total Bill:* ${totalAmount}%0A%0A*Order Mode:* Cash On Delivery`;
         window.open(`https://wa.me/9103803607?text=${msg}`);
+    }
+
+    function filter(type) {
+        const cards = document.querySelectorAll('.card');
+        cards.forEach(c => {
+            if(type === 'all' || c.getAttribute('data-type') === type) {
+                c.style.display = 'block';
+            } else { c.style.display = 'none'; }
+        });
     }
 </script>
 
