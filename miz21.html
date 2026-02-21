@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Misba Gazi | 100+ Designer Varieties</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --pink: #ff2d75; --dark: #1a1a1a; --gold: #d4af37; --bg: #f9f9f9; }
+        * { margin:0; padding:0; box-sizing:border-box; font-family: 'Poppins', sans-serif; }
+        body { background: var(--bg); color: var(--dark); }
+
+        header { background: white; padding: 12px 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
+        .logo { font-size: 22px; font-weight: 800; color: var(--pink); text-transform: uppercase; }
+        
+        .category-nav { background: white; padding: 10px; display: flex; gap: 10px; overflow-x: auto; border-bottom: 1px solid #eee; position: sticky; top: 55px; z-index: 999; scrollbar-width: none; }
+        .cat-item { padding: 8px 20px; background: #eee; border-radius: 20px; font-size: 13px; cursor: pointer; white-space: nowrap; font-weight: 600; }
+        .cat-item.active { background: var(--pink); color: white; }
+
+        .container { max-width: 1300px; margin: 20px auto; padding: 0 15px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; }
+        
+        .product-card { background: white; border-radius: 10px; overflow: hidden; border: 1px solid #eee; display: flex; flex-direction: column; transition: 0.3s; }
+        .product-card.hidden { display: none; }
+        
+        .img-box { position: relative; width: 100%; height: 220px; background: #f0f0f0; }
+        .img-box img { width: 100%; height: 100%; object-fit: cover; }
+        .badge { position: absolute; top: 8px; left: 8px; background: var(--pink); color: white; font-size: 10px; padding: 3px 7px; border-radius: 3px; font-weight: bold; }
+        .anti-badge { background: #00b894; }
+
+        .p-details { padding: 12px; flex-grow: 1; }
+        .p-name { font-size: 13px; font-weight: 600; color: #444; height: 35px; overflow: hidden; margin-bottom: 5px; }
+        .p-price { font-size: 16px; font-weight: 700; color: var(--pink); }
+        
+        .btn-group { display: flex; gap: 5px; padding: 0 12px 12px; }
+        .add-cart { background: #f0f0f0; color: #333; border: none; padding: 8px; border-radius: 5px; font-size: 11px; cursor: pointer; flex: 1; font-weight: 600; }
+        .buy-now { background: var(--dark); color: white; border: none; padding: 8px; border-radius: 5px; font-size: 11px; cursor: pointer; flex: 1; font-weight: 600; }
+
+        #cartSide { position: fixed; right: -100%; top: 0; width: 350px; height: 100%; background: white; z-index: 2000; transition: 0.4s; padding: 20px; box-shadow: -5px 0 15px rgba(0,0,0,0.1); overflow-y: auto; }
+        #cartSide.active { right: 0; }
+        .form-area { background: #fff1f5; padding: 15px; border-radius: 10px; margin-top: 20px; }
+        .form-area input { width: 100%; padding: 10px; margin-bottom: 8px; border: 1px solid #ddd; border-radius: 5px; }
+        .wa-submit { background: #25D366; color: white; border: none; width: 100%; padding: 15px; border-radius: 5px; font-weight: 800; cursor: pointer; }
+
+        @media (max-width: 500px) { .grid { grid-template-columns: 1fr 1fr; } #cartSide { width: 100%; } }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">Misba Gazi</div>
+    <div onclick="toggleCart()" style="cursor:pointer; position:relative;">
+        <i class="fas fa-shopping-bag" style="font-size:22px;"></i>
+        <span id="cartCount" style="position:absolute; top:-5px; right:-8px; background:var(--pink); color:white; font-size:10px; padding:2px 6px; border-radius:50%;">0</span>
+    </div>
+</header>
+
+<div class="category-nav">
+    <div class="cat-item active" onclick="filter('all', this)">All Stock</div>
+    <div class="cat-item" onclick="filter('jewellery', this)">Jewellery</div>
+    <div class="cat-item" onclick="filter('anti', this)">Anti-Tarnish</div>
+    <div class="cat-item" onclick="filter('earring', this)">Earrings</div>
+    <div class="cat-item" onclick="filter('ring', this)">Rings</div>
+    <div class="cat-item" onclick="filter('outfit', this)">Outfits</div>
+</div>
+
+<div class="container">
+    <div class="grid" id="productGrid">
+        
+        <div class="product-card" data-cat="anti">
+            <div class="badge anti-badge">NO FADE</div>
+            <div class="img-box"><img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=300"></div>
+            <div class="p-details"><div class="p-name">Golden Snake Chain (Anti-Tarnish)</div><div class="p-price">₹1,199</div></div>
+            <div class="btn-group">
+                <button class="add-cart" onclick="addToCart('Snake Chain', 1199)">Cart</button>
+                <button class="buy-now" onclick="buyNow('Snake Chain', 1199)">Buy Now</button>
+            </div>
+        </div>
+
+        <div class="product-card" data-cat="anti">
+            <div class="badge anti-badge">WATERPROOF</div>
+            <div class="img-box"><img src="https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=300"></div>
+            <div class="p-details"><div class="p-name">Luxury Rose Gold Bracelet</div><div class="p-price">₹999</div></div>
+            <div class="btn-group">
+                <button class="add-cart" onclick="addToCart('RG Bracelet', 999)">Cart</button>
+                <button class="buy-now" onclick="buyNow('RG Bracelet', 999)">Buy Now</button>
+            </div>
+        </div>
+
+        <div class="product-card" data-cat="earring">
+            <div class="img-box"><img src="https://images.unsplash.com/photo-1630019852942-f89202989a59?w=300"></div>
+            <div class="p-details"><div class="p-name">Korean Pearl Drop Earrings</div><div class="p-price">₹450</div></div>
+            <div class="btn-group">
+                <button class="add-cart" onclick="addToCart('Pearl Earrings', 450)">Cart</button>
+                <button class="buy-now" onclick="buyNow('Pearl Earrings', 450)">Buy Now</button>
+            </div>
+        </div>
+
+        <div class="product-card" data-cat="earring">
+            <div class="img-box"><img src="https://images.unsplash.com/photo-1535633302723-99e393e44a5e?w=300"></div>
+            <div class="p-details"><div class="p-name">Heavy Meenakari Jhumkas</div><div class="p-price">₹750</div></div>
+            <div class="btn-group">
+                <button class="add-cart" onclick="addToCart('Meenakari Jhumka', 750)">Cart</button>
+                <button class="buy-now" onclick="buyNow('Meenakari Jhumka', 750)">Buy Now</button>
+            </div>
+        </div>
+
+        <div class="product-card" data-cat="ring">
+            <div class="img-box"><img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=300"></div>
+            <div class="p-details"><div class="p-name">Adjustable Butterfly Ring</div><div class="p-price">₹350</div></div>
+            <div class="btn-group">
+                <button class="add-cart" onclick="addToCart('Butterfly Ring', 350)">Cart</button>
+                <button class="buy-now" onclick="buyNow('Butterfly Ring', 350)">Buy Now</button>
+            </div>
+        </div>
+
+        <div class="product-card" data-cat="ring">
+            <div class="img-box"><img src="https://images.unsplash.com/photo-1544450295-a82e707df75a?w=300"></div>
+            <div class="p-details"><div class="p-name">Classic Solitaire Diamond Ring</div><div class="p-price">₹599</div></div>
+            <div class="btn-group">
+                <button class="add-cart" onclick="addToCart('Solitaire Ring', 599)">Cart</button>
+                <button class="buy-now" onclick="buyNow('Solitaire Ring', 599)">Buy Now</button>
+            </div>
+        </div>
+
+        <div class="product-card" data-cat="outfit">
+            <div class="img-box"><img src="https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=300"></div>
+            <div class="p-details"><div class="p-name">Heavy Velvet Party Gown</div><div class="p-price">₹3,499</div></div>
+            <div class="btn-group">
+                <button class="add-cart" onclick="addToCart('Velvet Gown', 3499)">Cart</button>
+                <button class="buy-now" onclick="buyNow('Velvet Gown', 3499)">Buy Now</button>
+            </div>
+        </div>
+
+        </div>
+</div>
+
+<div id="cartSide">
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+        <h3>Your Shopping Bag</h3>
+        <span onclick="toggleCart()" style="font-size:24px; cursor:pointer;">&times;</span>
+    </div>
+    <div id="cartList" style="margin:20px 0;"></div>
+    <h3>Total: ₹<span id="total">0</span></h3>
+    
+    <div class="form-area">
+        <input type="text" id="uName" placeholder="Full Name">
+        <input type="tel" id="uPhone" placeholder="WhatsApp Number">
+        <textarea id="uAddr" style="width:100%; padding:10px; border-radius:5px; border:1px solid #ddd; margin-bottom:10px;" placeholder="Full Address"></textarea>
+        <button class="wa-submit" onclick="sendToWA()">ORDER ON WHATSAPP</button>
+    </div>
+</div>
+
+<script>
+    let cart = [];
+
+    function filter(category, element) {
+        document.querySelectorAll('.cat-item').forEach(i => i.classList.remove('active'));
+        element.classList.add('active');
+        const products = document.querySelectorAll('.product-card');
+        products.forEach(p => {
+            if(category === 'all' || p.getAttribute('data-cat') === category) {
+                p.classList.remove('hidden');
+            } else { p.classList.add('hidden'); }
+        });
+    }
+
+    function toggleCart() { document.getElementById('cartSide').classList.toggle('active'); }
+
+    function addToCart(name, price) {
+        cart.push({name, price});
+        renderCart();
+        alert(name + " added to cart!");
+    }
+
+    function buyNow(name, price) {
+        cart = [{name, price}];
+        renderCart();
+        toggleCart();
+    }
+
+    function renderCart() {
+        const list = document.getElementById('cartList');
+        const count = document.getElementById('cartCount');
+        const total = document.getElementById('total');
+        count.innerText = cart.length;
+        let html = '';
+        let sum = 0;
+        cart.forEach((item, i) => {
+            html += `<div style="display:flex; justify-content:space-between; margin-bottom:10px; border-bottom:1px solid #eee; padding-bottom:5px;">
+                <span>${item.name}</span>
+                <span>₹${item.price} <i class="fas fa-trash" style="color:red; margin-left:8px; cursor:pointer;" onclick="removeItem(${i})"></i></span>
+            </div>`;
+            sum += item.price;
+        });
+        list.innerHTML = html || "Your bag is empty!";
+        total.innerText = sum;
+    }
+
+    function removeItem(i) { cart.splice(i, 1); renderCart(); }
+
+    function sendToWA() {
+        const name = document.getElementById('uName').value;
+        const phone = document.getElementById('uPhone').value;
+        const addr = document.getElementById('uAddr').value;
+        if(!name || !phone || !addr || cart.length === 0) { alert("Please fill all details!"); return; }
+        let items = "";
+        cart.forEach((item, i) => { items += `${i+1}. ${item.name} - ₹${item.price}%0A`; });
+        const msg = `*NEW ORDER - MISBA GAZI*%0A%0A*Name:* ${name}%0A*Phone:* ${phone}%0A*Address:* ${addr}%0A%0A*Items:*%0A${items}%0A*Total:* ₹${document.getElementById('total').innerText}%0A*COD ORDER*`;
+        window.open(`https://wa.me/9103803607?text=${msg}`);
+    }
+</script>
+
+</body>
+</html>
